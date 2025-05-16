@@ -38,7 +38,8 @@ public class GraphVisualizerPanel extends JPanel {
     }
     private void printOptions(){
         String chosenFile = selectedFile.getAbsolutePath();
-
+        String fileFormat = selectedFile.getAbsolutePath().substring(selectedFile.getAbsolutePath().length() - 3);
         System.out.println("Wybrany plik do wizualizacji: " + chosenFile);
+        System.out.println("Format pliku: " + fileFormat);
     }
 }
