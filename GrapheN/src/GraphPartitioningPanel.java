@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 public class GraphPartitioningPanel extends JPanel {
     public int n;
@@ -51,7 +52,13 @@ public class GraphPartitioningPanel extends JPanel {
         submit.setText("Submit");
         submit.setFocusable(false);
         submit.setEnabled(false);
-        submit.addActionListener(e -> printOptions());
+        submit.addActionListener(e -> {
+            try {
+                printOptions();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
 
         // Dodanie komponentów
@@ -67,7 +74,10 @@ public class GraphPartitioningPanel extends JPanel {
         add(submit);
     }
 
-    private void printOptions(){
+    private void printOptions() throws IOException {
+        Graph graf = LoadCSRRG.loadGraph(selectedFile.getAbsolutePath());
+
+
         String inputFile = fileLabel.getText();
         if(!splitCountField.getText().isEmpty()){
             n = Integer.parseInt(splitCountField.getText());
@@ -89,5 +99,9 @@ public class GraphPartitioningPanel extends JPanel {
         System.out.println("ilosc podzialow: " + n);
         System.out.println("margines bledu: " + margin);
         System.out.println("typ pliku wyjsciowego: " + outputType);
+
+        for (Vertices w : graf.getWierzcholki().values()) {
+            System.out.println(w + " -> Sąsiedzi: " + w.getNeighbors());
+        }
     }
 }
