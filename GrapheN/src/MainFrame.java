@@ -13,8 +13,8 @@ public class MainFrame extends JFrame {
         add(menu, BorderLayout.WEST);
 
         // Prawy panel (wizualizacja)
-        JPanel visualizationPanel = createVisualizationPanel();
-        add(visualizationPanel, BorderLayout.CENTER);
+        //JPanel visualizationPanel = createVisualizationPanel();
+        //add(visualizationPanel, BorderLayout.CENTER);
     }
 
     private JPanel createMenuPanel() {
@@ -28,16 +28,17 @@ public class MainFrame extends JFrame {
         menuPanel.add(Box.createVerticalStrut(20));
 
         // Panel do wizualizacji
-        GraphVisualizerPanel visualizerPanel = new GraphVisualizerPanel();
+        GraphVisualizerPanel visualizerPanel = new GraphVisualizerPanel(this);
         menuPanel.add(visualizerPanel);
 
         return menuPanel;
     }
 
-    private JPanel createVisualizationPanel() {
-        JPanel rightPanel = new JPanel();
-        rightPanel.setBackground(Color.WHITE);
-        rightPanel.setBorder(BorderFactory.createTitledBorder("Visualization Area"));
-        return rightPanel;
+    public JPanel createVisualizationPanel() {
+        JPanel graphPanel = new JPanel();
+        graphPanel.setBackground(Color.WHITE);
+        graphPanel.setBorder(BorderFactory.createTitledBorder("Visualization Area"));
+        return graphPanel;
+        //na razie jest to placeholder, po wczytaniu grafu zostanie zastapione nowym panelem
     }
 }
